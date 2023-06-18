@@ -11,7 +11,6 @@ export const createAssessment = asyncHandler(async (req, res) => {
   const newAssessment = await getAssessmentSchema.create({ data });
 
   res.status(201).json({
-    success: true,
     message: "Submit the data successfully",
   });
 });

@@ -12,10 +12,14 @@ export const createSignUp = asyncHandler(async (req, res) => {
   const existingUser = await signUpModel.findOne({ name });
   if (existingUser) {
     res.status(409).json({
-      title: "Name Conflict",
-      message: "Name already exists",
+      message: "User already signed up with the same name",
     });
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await signUpModel.create({
+      name,
+      password: hashedPassword,
+    });
+    res.status(201).json({ message: "User created successfully" });
   }
-
-  res.status(201).json({ success: true, message: "User created successfully" });
 });

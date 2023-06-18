@@ -4,19 +4,11 @@ import { z } from "zod";
 export const signupSchema = z.object({
   name: z
     .string()
-    .refine(
-      (
-        value //.test(value),
-      ) => "Name should contain only alphabets"
-    )
-    .refine(
-      (value) => value.length >= 2,
-      "Name should have at least 3 characters"
-    )
-    .refine(
-      (value) => value.length <= 30,
-      "Name should have at most 30 characters"
-    ),
+    .min(3, { message: "Name should have at least 3 characters" })
+    .max(30, { message: "Name should have at most 30 characters" })
+    .regex(/^[ A-Za-z0-9_:@./#&+-]*$/, {
+      message: "Name should have only letters, numbers",
+    }),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
@@ -36,7 +28,7 @@ export const assessmentSchema = z.array(
   z.object({
     id: z
       .string()
-      .regex(/^[a-zA-Z0-9]+$/, { message: "Id ontains alphnumeric value" }),
+      .regex(/^[a-zA-Z0-9]+$/, { message: "Id contains alphnumeric value" }),
     option: z.string().regex(/^[ A-Za-z0-9_:@./#&+-]*$/, {
       message: "Options ontains alphnumeric value",
     }),
@@ -46,5 +38,10 @@ export const assessmentSchema = z.array(
 export const nextPageQParamSchema = z.object({
   currentpage: z
     .string()
-    .refine((value) => "Param should contain only alphabets"),
+    .nullable()
+    .optional()
+    .refine(
+      (value) => value === null || /^[A-Za-z]+$/.test(value),
+      "Param should contains only alphabets"
+    ),
 });
