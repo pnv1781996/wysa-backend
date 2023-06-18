@@ -1,16 +1,24 @@
-const express = require("express");
+import express, { json } from "express";
+import errorHandler from "./middleware/errorHandler.js";
+import connectDb from "./config/dbConnection.js";
+import userRoutes from "./routes/userRoutes.js";
+import nextPageRoutes from "./routes/nextPageRoutes.js";
+import assessmentRoutes from "./routes/assessmentRoutes.js";
+
+import dotenv from "dotenv";
+dotenv.config();
+
+connectDb();
 const app = express();
-const port = 3000;
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-app.get("/", (req, res) => {
-  console.log("hello from be.");
-  res.json({ message: "ok" });
-});
+app.use(json());
+const port = process.env.PORT || 3000;
+
+app.use(json());
+app.use("/api/pages", nextPageRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/submit", assessmentRoutes);
+app.use(errorHandler);
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
