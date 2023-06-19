@@ -4,6 +4,7 @@ import connectDb from "./config/dbConnection.js";
 import userRoutes from "./routes/userRoutes.js";
 import nextPageRoutes from "./routes/nextPageRoutes.js";
 import assessmentRoutes from "./routes/assessmentRoutes.js";
+import cors from "cors";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -13,7 +14,7 @@ const app = express();
 app.use(json());
 const port = process.env.PORT || 3000;
 
-app.use(json());
+app.use(cors()); // Enable CORS
 app.use("/api/pages", nextPageRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/submit", assessmentRoutes);
