@@ -1,12 +1,12 @@
 import express, { json } from "express";
-import errorHandler from "./middleware/errorHandler.js";
-import connectDb from "./config/dbConnection.js";
-import userRoutes from "./routes/userRoutes.js";
-import nextPageRoutes from "./routes/nextPageRoutes.js";
-import assessmentRoutes from "./routes/assessmentRoutes.js";
+import errorHandler from "../middleware/errorHandler.js";
+import connectDb from "../config/dbConnection.js";
+import userRoutes from "../routes/userRoutes.js";
+import nextPageRoutes from "../routes/nextPageRoutes.js";
+import assessmentRoutes from "../routes/assessmentRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import { tokenMiddleware } from "./middleware/tokenMiddleware.js";
+import { tokenMiddleware } from "../middleware/tokenMiddleware.js";
 dotenv.config();
 
 connectDb();
@@ -26,7 +26,7 @@ app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
 
-export default app;
+export { app };
 // token exists
 // yes -> user is authenticated and asking for next screens after signup
 // no -> Check if api is get(match  url) and req.query.currentScreen = null
