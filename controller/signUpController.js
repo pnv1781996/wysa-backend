@@ -10,10 +10,10 @@ export const createSignUp = asyncHandler(async (req, res) => {
       message: "Name and password is required",
     });
   }
-  // Check if user with the same name already exists
+  // Check if user with the same name already exist
   const existingUser = await signUpModel.findOne({ name });
   if (existingUser) {
-    return res.status(409).json({
+    res.status(409).send({
       message: "User already signed up with the same name",
     });
   }
