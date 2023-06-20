@@ -25,8 +25,6 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
-
-export { app };
 // token exists
 // yes -> user is authenticated and asking for next screens after signup
 // no -> Check if api is get(match  url) and req.query.currentScreen = null
