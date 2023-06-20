@@ -7,8 +7,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "debug": "nodemon --inspect index.js",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +30,8 @@
     "mongoose": "^7.3.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1"
   }
 }
