@@ -1,12 +1,12 @@
 import express, { json } from "express";
-import errorHandler from "../middleware/errorHandler.js";
-import connectDb from "../config/dbConnection.js";
-import userRoutes from "../routes/userRoutes.js";
-import nextPageRoutes from "../routes/nextPageRoutes.js";
-import assessmentRoutes from "../routes/assessmentRoutes.js";
+import errorHandler from "./middleware/errorHandler.js";
+import connectDb from "./config/dbConnection.js";
+import userRoutes from "./routes/userRoutes.js";
+import nextPageRoutes from "./routes/nextPageRoutes.js";
+import assessmentRoutes from "./routes/assessmentRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import { tokenMiddleware } from "../middleware/tokenMiddleware.js";
+import { tokenMiddleware } from "./middleware/tokenMiddleware.js";
 dotenv.config();
 
 connectDb();
