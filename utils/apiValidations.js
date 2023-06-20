@@ -7,7 +7,8 @@ export const signupSchema = z.object({
     .min(3, { message: "Name should have at least 3 characters" })
     .max(30, { message: "Name should have at most 30 characters" })
     .regex(/^[ A-Za-z0-9_:@./#&+-]*$/, {
-      message: "Name should have only letters, numbers",
+      message:
+        "Name should have only some letters, numbers and special symbol like (_:@./#&+-)",
     }),
   password: z
     .string()

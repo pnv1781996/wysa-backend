@@ -5,13 +5,14 @@ import getDashboardSchema from "../models/getDashboardDataModel.js";
 
 export const getNextPage = asyncHandler(async (req, res) => {
   const currentValue = req.query.currentpage;
-  console.log(currentValue);
   let currentPageData;
   if (!currentValue) {
     currentPageData = await getNextPageSchema.findOne();
   } else if (currentValue === "signup") {
     currentPageData = await getQuestionSchema.findOne();
   } else if (currentValue === "question") {
+    currentPageData = await getDashboardSchema.findOne();
+  } else if (currentValue === "dashboard") {
     currentPageData = await getDashboardSchema.findOne();
   }
 

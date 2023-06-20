@@ -1,3 +1,4 @@
+import { z } from "zod";
 import {
   assessmentSchema,
   signupSchema,
@@ -29,8 +30,15 @@ export const payloadMiddleware = (req, res, next) => {
     }
     next();
   } catch (error) {
-    return res.status(400).send({
-      message: "Invalid data",
-    });
+    if (error instanceof z.ZodError) {
+      const errorMessage = error.errors.map((err) => err.message).join(", ");
+      return res.status(400).send({
+        message: errorMessage,
+      });
+    } else {
+      return res.status(400).send({
+        message: "Invalid data",
+      });
+    }
   }
 };
