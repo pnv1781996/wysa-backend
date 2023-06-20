@@ -26,16 +26,7 @@ app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
 
-import functions from "firebase-functions";
-import logger from "firebase-functions/logger";
-export const appV1 = functions
-  // Choose a region other than the default us-central1
-  .region("asia-south1")
-  // Increased memory, decreased timeout (compared to defaults)
-  .runWith({ memory: "2GB", timeoutSeconds: 30 })
-  .https.onRequest(app);
-
-// export default app;
+export default app;
 // token exists
 // yes -> user is authenticated and asking for next screens after signup
 // no -> Check if api is get(match  url) and req.query.currentScreen = null
